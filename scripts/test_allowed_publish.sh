@@ -65,11 +65,11 @@ if mosquitto_pub \
     -q 1 \
     -d; then
     echo ""
-    echo "SUCCESS: Message published to $TOPIC"
+    echo " ✅ SUCCESS: Message published to $TOPIC"
     echo "This publish was ALLOWED because device_01 is publishing to its own topic."
 else
     echo ""
-    echo "FAILED: Publish was rejected"
+    echo " ❌ FAILED: Publish was rejected"
     exit 1
 fi
 

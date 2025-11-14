@@ -80,7 +80,7 @@ BROKER_LOG_ANY=$(docker exec mqtt-broker cat /mosquitto/log/mosquitto.log 2>&1 |
 # Check output for denial indicators or non-zero exit code
 if [ $EXIT_CODE -ne 0 ] || [ -n "$BROKER_LOG_DENIED" ] || [ -n "$BROKER_LOG_RC135" ] || [ -n "$BROKER_LOG_ANY" ] || echo "$OUTPUT" | grep -qi "not authorized\|denied\|error\|135"; then
     echo ""
-    echo "SUCCESS: Publish was BLOCKED as expected"
+    echo " ✅ SUCCESS: Publish was BLOCKED as expected"
     echo "Device $DEVICE_ID cannot publish to $TARGET_DEVICE_ID's topic."
     echo "This proves the ACL is working correctly."
     if [ -n "$BROKER_LOG_DENIED" ]; then
@@ -97,17 +97,17 @@ if [ $EXIT_CODE -ne 0 ] || [ -n "$BROKER_LOG_DENIED" ] || [ -n "$BROKER_LOG_RC13
 else
     echo "$OUTPUT"
     echo ""
-    echo "WARNING: Could not definitively determine if publish was blocked"
+    echo " ⚠️  WARNING: Could not definitively determine if publish was blocked"
     echo "Checking broker logs for confirmation..."
     BROKER_RECENT=$(docker exec mqtt-broker cat /mosquitto/log/mosquitto.log 2>&1 | tail -5)
     echo "Recent broker logs:"
     echo "$BROKER_RECENT"
     echo ""
     if echo "$BROKER_RECENT" | grep -qi "denied\|rc135"; then
-        echo "ACL is working! Found denial in broker logs"
+        echo " ✅ ACL is working! Found denial in broker logs"
         exit 0
     else
-        echo "Note: If you see 'Denied PUBLISH' or 'rc135' in the logs, the ACL is working."
+        echo " ⚠️  Note: If you see 'Denied PUBLISH' or 'rc135' in the logs, the ACL is working."
         echo "The script may not detect it due to mosquitto_pub behavior."
         exit 0
     fi

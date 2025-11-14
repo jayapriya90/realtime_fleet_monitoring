@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: mqtt-broker
+    ports:
+      - "8883:8883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./acl.conf:/mosquitto/config/acl.conf
+      - ./certs/ca:/mosquitto/config/ca
+      - ./certs/broker:/mosquitto/config/broker
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    restart: unless-stopped
+    networks:
+      - mqtt_network
+
+volumes:
+  mosquitto_data:
+  mosquitto_logs:
+
+networks:
+  mqtt_network:
+    driver: bridge
+

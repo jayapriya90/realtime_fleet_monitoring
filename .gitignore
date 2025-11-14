@@ -1,0 +1,31 @@
+# Certificates and keys
+# certs/
+# *.pem
+# *.key
+# *.csr
+# *.srl
+
+# Mosquitto data
+mosquitto_data/
+mosquitto_logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

@@ -94,7 +94,7 @@ EOF
 )
     fi
     
-    # Create combined cert+key for client use (some MQTT clients need this)
+    # Create combined cert+key for client use (some Message Queuing Telemetry Transport clients need this)
     if [ ! -f "$DEVICE_DIR/${DEVICE_ID}-fullchain.pem" ]; then
         cat "$DEVICE_DIR/${DEVICE_ID}-cert.pem" "$CA_DIR/ca-cert.pem" > "$DEVICE_DIR/${DEVICE_ID}-fullchain.pem"
     fi
